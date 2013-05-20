@@ -12,12 +12,26 @@ namespace news
 			connect(hostname,username,password);
 		}
 
+		/**
+		 * executes 'OVER' command'
+		 * http://tools.ietf.org/html/rfc3977#section-8.3
+		 */
 		public ArrayList getOverNews(string newsgroup, int begin = 0, int end = 0)
 		{
+			string message;
+			string response;
 			ArrayList retVal = new ArrayList();
 			getGroupInformation(newsgroup);
 
-			//TODO
+			message = "OVER ";
+			write (message);
+			response = getResponse();
+			if(response.Substring(0,3) != "211" && response.Substring(0,3) != "281")
+			{
+				throw new System.ApplicationException(response);
+			}
+			response = getResponse();
+			// TODO
 			return retVal;
 
 		}
@@ -44,9 +58,12 @@ namespace news
 			return new {startId = start, endId = end};
 		}
 
+		/**
+		 * Just returns the headers of the newspostings
+		 */ 
 		public ArrayList getHeadNews(string newsgroup, long startId = 0, long endId = 0)
 		{
-			//FIXME lijkt verdomt veel op getArticles
+			//FIXME Look a fscking lot like getCompleteNews
 			string message;
 			string response;
 			ArrayList retval = new ArrayList();
@@ -166,6 +183,9 @@ namespace news
 			return retval;
 		}
 
+		/**
+		 * Untested code ahead!
+		 */
 		public void post(string subject, string from, string content, string newsgroup = "alt.test")
 		{
 			string message;

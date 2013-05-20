@@ -61,7 +61,9 @@ namespace news
 		}
 
 
-
+		/**
+		 * Writes a string (most of the time just a singleline command) to the server
+		 */ 
 		protected void write(string message)
 		{
 			System.Text.UTF8Encoding en = new System.Text.UTF8Encoding();
@@ -76,6 +78,9 @@ namespace news
 			Debug.WriteLine("WRITE: " + message);
 		}
 
+		/*
+		 * Returns the response of the server, mostly after a write() command 
+		 */
 		protected string getResponse()
 		{
 			System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding();
