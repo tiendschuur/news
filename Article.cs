@@ -52,8 +52,8 @@ namespace news
 			char[] seps =  {' '};
 			string[] values = response.Split (seps);
 
-			long start = Int32.Parse(values[2]); // reported low water mark
-			long end = Int32.Parse(values[3]); // reported high water mark
+			long start = Int64 .Parse(values[2]); // reported low water mark
+			long end = Int64.Parse(values[3]); // reported high water mark
 
 			return new {startId = start, endId = end};
 		}
@@ -90,7 +90,7 @@ namespace news
 					continue;
 				}
 
-				if(response.Substring(0,3) != "220")
+				if(response.Substring(0,3) != "221") 
 				{
 					throw new System.ApplicationException(response);
 				}

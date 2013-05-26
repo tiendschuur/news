@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Collections;
 using System.Configuration;
+using System.Collections.Specialized;
 using System.Diagnostics;
 
 //todo reflection & generics
@@ -16,9 +17,9 @@ namespace news
 			try
 			{
 				//Debug.Listeners.Add(new TextWriterTraceListener(System.Console.Out));
-				Article nntpArticle = new Article(ConfigurationSettings.AppSettings["hostname"],
-				                                  ConfigurationSettings.AppSettings["username"], 
-				                                  ConfigurationSettings.AppSettings["password"]);
+				Article nntpArticle = new Article(ConfigurationManager.AppSettings.Get("hostname"),
+				                                  ConfigurationManager.AppSettings.Get("username"), 
+				                                  ConfigurationManager.AppSettings.Get("password"));
 
 				/**
 				 * Returns a list of all newsgroups available on the server
@@ -52,16 +53,17 @@ namespace news
 					System.Console.WriteLine(newsPosting);
 					i++;
 				}
-				System.Console.WriteLine(i + " postings gelezen");
+				System.Console.WriteLine(i + " postings read");
 				*/
-				ArrayList newsPostings = nntpArticle.getHeadNews("alt.test");
+				ArrayList newsPostings = nntpArticle.getHeadNews("alt.binaries.boneless");
 				int i = 0;
 				foreach(string newsPosting in newsPostings)
 				{
 					System.Console.WriteLine(newsPosting);
 					i++;
 				}
-				System.Console.WriteLine(i + " postings gelezen");
+				System.Console.WriteLine(i + " postings read");
+
 
 			}
 			catch(System.Exception e)
