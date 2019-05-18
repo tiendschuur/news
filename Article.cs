@@ -36,7 +36,7 @@ namespace news
 
 		}
 
-		public object getGroupInformation(string newsgroup)
+		private object getGroupInformation(string newsgroup)
 		{
 			string message;
 			string response;
